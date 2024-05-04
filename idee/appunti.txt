@@ -1,0 +1,10 @@
+funzionalita':
+
+	-siamo gia' all'interno di una casa, non serve 'crearne una'
+	-aggiunta sensori: crea un sensore, dagli il nome e scegli il tipo
+	-visualizza sensori: mostra una lista di sensori che si possono cliccare per vederne il funzionamento
+	-elimina sensori: cliccandoci sopra puoi vedere nome e altre informazioni, e scgliere di eliminarlo
+
+
+schermata home: contiene una vista dei vari sensori aggiunti e selezionandone uno si puo' vedere cosa sta rilevando in quel momento
+ 
