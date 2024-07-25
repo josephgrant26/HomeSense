@@ -1,6 +1,6 @@
 #include "sensor.h"
 
-Sensor::Sensor(bool i=false): isInit(i) {}
+Sensor::Sensor(): isInit(false) {}
 
 void Sensor::initialize() { isInit= true; }
 

@@ -7,6 +7,6 @@ public:
 
     MotionSensor(double=0);
 
-    void calibrate(double);
-    double getReading();
+    virtual void calibrate(double);
+    
 };

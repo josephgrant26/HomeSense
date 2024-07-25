@@ -1,5 +1,7 @@
 #include "waterSensor.h"
 
-WaterSensor::WaterSensor(double d=0): leak(d) {}
+WaterSensor::WaterSensor(): Sensor(), leak(0), isAlarm(0) {}
 
-void WaterSensor::alarm() {}
+void WaterSensor::alarm() { isAlarm=true; }
+
+double WaterSensor::getReading() {}

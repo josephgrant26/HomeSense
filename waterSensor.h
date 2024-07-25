@@ -1,13 +1,16 @@
 #include "sensor.h"
 
-class WaterSensor{
+class WaterSensor: public Sensor{
 private:
     double leak;
+    bool isAlarm;
 
 public:
 
-WaterSensor(double=0);
+    WaterSensor();
 
-void alarm();
+    void alarm();
+
+    double getReading();
 
 };

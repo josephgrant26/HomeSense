@@ -6,7 +6,7 @@ private:
     bool isInit;
 
 public:
-    Sensor(bool=false);
+    Sensor();
     virtual double getReading()=0;
     void initialize();
 
