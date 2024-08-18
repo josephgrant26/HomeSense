@@ -6,7 +6,7 @@
 #include <QVector>
 #include <QPushButton>
 #include <iostream>
-//#include "src/controller/controller.h"
+#include "src/controller/controller.h"
 
 
 using std::string;

@@ -34,6 +34,6 @@ public slots:
 
     void handleClickedSensor();
 
-};
+}; //03813830
 
 #endif // CONTROLLER_H

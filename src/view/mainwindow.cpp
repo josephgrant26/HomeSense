@@ -4,7 +4,7 @@ MainWindow::MainWindow(QWidget* parent): QWidget(parent), logo(new QLabel(this))
     sensors(new QVector<QPushButton*>), addSensorButton(new QPushButton(this)){
 
 
-    connect(addSensorButton, &QPushButton::clicked, );
+    //connect(addSensorButton, &QPushButton::clicked, );
 
     QPixmap imgMap("C:/Users/josep/OneDrive/Documents/HomeSense/src/logo.png");
     logo->setPixmap(imgMap);
