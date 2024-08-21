@@ -1,43 +1,18 @@
 #include "mainwindow.h"
+#include "QDir"
 
-MainWindow::MainWindow(QWidget* parent): QWidget(parent), logo(new QLabel(this)), mainLayout(new QVBoxLayout(this)),
+MainWindow::MainWindow(QWidget* parent): QWidget(parent), mainLayout(new QGridLayout(this)),
     sensors(new QVector<QPushButton*>), addSensorButton(new QPushButton(this)){
-
-
-    //connect(addSensorButton, &QPushButton::clicked, );
-
-    QPixmap imgMap("C:/Users/josep/OneDrive/Documents/HomeSense/src/logo.png");
-    logo->setPixmap(imgMap);
     addSensorButton->setText("Add Sensor");
 
-    //test loader:
-
-    sensorLoader();
-
+    connect(addSensorButton, &QPushButton::clicked, this, &MainWindow::openSensorPanel);
 
     //main layout:
-    mainLayout->addWidget(logo);
     mainLayout->addWidget(addSensorButton);
-    displaySensors();
 
 
     //set main layout:
-
     this->setLayout(mainLayout);
-
-
-
-}
-
-
-void MainWindow::addSensors(string sensorName){
-
-    QPushButton sensor;
-    sensor.setText(QString::fromStdString(sensorName));
-
-    sensors->push_back(&sensor);
-
-    displaySensors();
 
 
 }
@@ -52,13 +27,12 @@ void MainWindow::displaySensors(){
 
 }
 
-void MainWindow::sensorLoader(){
-    int i =0;
-    for(i = 0; i<15; ++i){
-        QPushButton* label = new QPushButton();
-        label->setText(QString::number(i));
-        sensors->push_back(label);
+void MainWindow::sensorLoader(const QVector<QPushButton*>& v){
+
+    for(QVector<QPushButton*>::ConstIterator it = v.cbegin(); it != v.cend(); ++it){
+        sensors->push_back(*it);
     }
 }
+
 
 

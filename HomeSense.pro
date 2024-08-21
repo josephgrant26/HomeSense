@@ -11,15 +11,29 @@ CONFIG += c++17
 SOURCES += \
         src/main.cpp    \
         src/controller/controller.cpp \
-        src/view/mainbutton.cpp \
+        src/model/airConditioner.cpp \
+        src/model/ariQualitySensor.cpp \
+        src/model/motionSensor.cpp \
+        src/model/proxAlarm.cpp \
+        src/model/sensor.cpp \
+        src/model/temperatureSensor.cpp \
+        src/model/waterSensor.cpp \
         src/view/mainwindow.cpp \
-        src/view/newsensorwindow.cpp
+        src/view/sensorpanel.cpp \
+        src/view/view.cpp
 
 HEADERS += \
     src/controller/controller.h \
-    src/view/mainbutton.h \
+    src/model/airConditioner.h \
+    src/model/airQualitySensor.h \
+    src/model/motionSensor.h \
+    src/model/proxAlarm.h \
+    src/model/sensor.h \
+    src/model/temperatureSensor.h \
+    src/model/waterSensor.h \
     src/view/mainwindow.h \
-    src/view/newsensorwindow.h
+    src/view/sensorpanel.h \
+    src/view/view.h
 
 FORMS +=
 
@@ -29,4 +43,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    src/logo.png
+    images/logo.png

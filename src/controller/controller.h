@@ -1,39 +1,43 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-#include "src/view/mainwindow.h"
+#include "src/view/view.h"
 #include <vector>
+#include <QVector>
+#include <QPushButton>
 #include <QObject>
-#include "src/view/newsensorwindow.h"
-//#include "sensor.h"
+//#include "src/model/sensor.h"
+#include "src/model/proxAlarm.h"
 
 using std::vector;
 
-class controller: public QObject{
+//class MainWindow;
+
+class Controller: public QObject{
 
     Q_OBJECT
 
-    MainWindow* mainWindow;
-    NewSensorWindow* newSensors;
-    //vector<Sensor*> sensors;
+    MainWindow* home;
+    SensorPanel* sensorPanel;
+    vector<Sensor*>* sensors;
+    View* view;
 
 public:
-    controller(MainWindow*, QObject* = nullptr);
+    Controller(QObject* = nullptr);
 
 
     //window management:
-    void openNewSensorWindow();
-    void closeNewSensorWindow();
-    void openSensorWindow();
-    void closeSensorWindow();
+    void InitHomeScreen();      //loads the home screen
 
     //vector and permanence
+    QVector<QPushButton*> createQLabelVector();     //creates the QPushbutton to be displayed in home screen
     bool loadData(); //reads a JSON and loads the sensors to the vector
     bool saveData(); //reads a JSON or user inputs to add sensros to the array and the save file
 
 public slots:
 
-    void handleClickedSensor();
+    //void handleClickedSensor();
+    void openWindow(QWidget*);
 
-}; //03813830
+};
 
 #endif // CONTROLLER_H

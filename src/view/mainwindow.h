@@ -2,11 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QLabel>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QVector>
 #include <QPushButton>
 #include <iostream>
-#include "src/controller/controller.h"
+
 
 
 using std::string;
@@ -20,25 +20,23 @@ class MainWindow: public QWidget
 
 private:
 
-    QLabel *logo;
-    QVBoxLayout* mainLayout;
+    QGridLayout* mainLayout;
     QVector<QPushButton*>* sensors;
     QPushButton* addSensorButton;
+
 
 
 
 public:
     MainWindow(QWidget* = nullptr);
 
-    void addSensors(string sensorName);
+    void displaySensors(); //displays QVector on window
 
-    void displaySensors();
-
-    void sensorLoader();
+    void sensorLoader(const QVector<QPushButton*>&); //loads sensors from controller to QVector
 
 signals:
 
-    void createdArray();
+    void openSensorPanel();
 
 
 
