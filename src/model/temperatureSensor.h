@@ -5,12 +5,15 @@
 class TemperatureSensor: public Sensor{
 private:
 
-    int temp;
+    int currentTemp;
 
 public:
 
-TemperatureSensor(string="new sensor");
+TemperatureSensor(string="new sensor", int =0);
 
+
+double getReading() const;
+void setCurrentTemperature(int);
 
 };
 

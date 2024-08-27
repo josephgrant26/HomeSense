@@ -1,8 +1,15 @@
 #include"proxAlarm.h"
 
-ProxAlarm::ProxAlarm(double d, string name): MotionSensor(d,name), isAlarm(0) {}
+ProxAlarm::ProxAlarm(string name, double d): MotionSensor(name,d), isAlarm(0) {}
 
-void ProxAlarm::soundAlarm() { isAlarm=true; }
+void ProxAlarm::soundAlarm() {
 
-double ProxAlarm::getReading()
-{return 0;}
+    if(isMovementDetected()){
+        isAlarm=true;
+        reset();
+    }
+}
+
+
+
+

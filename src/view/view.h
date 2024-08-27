@@ -5,9 +5,11 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QDir>
-//#include "src/controller/controller.h"
+#include <QScreen>
+
 #include "src/view/mainwindow.h"
 #include "src/view/sensorpanel.h"
+#include "src/view/addsensor.h"
 
 class View: public QWidget
 {
@@ -17,16 +19,22 @@ private:
     QLabel* logo;
     QGridLayout* mainLayout;
     MainWindow* home;
+    AddSensor* addSensor;
     SensorPanel* sensorPanel;
     QWidget* currentWidget;
+    QPushButton* saveFile;
+    void windowSize();
 
 
 public:
 
-    View(MainWindow*, SensorPanel*, QWidget* =0);
+    View(MainWindow*, AddSensor*, SensorPanel*, QWidget* =0);
 
     void setCurrentWidget(QWidget*);
-    void SetHome(const QVector<QPushButton*>&);    //loads up the mainwindow including the saved sensors
+    void setHome(const QVector<QPushButton*>&);    //loads up the mainwindow including the saved sensors
+
+signals:
+    void newSavePath();
 
 };
 

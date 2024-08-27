@@ -8,9 +8,8 @@ private:
 
 public:
 
-AirConditioner(string="new sensor");
+AirConditioner(string="new sensor", int=0);
 
-double getReading();
 void cool();
 void heat();
 

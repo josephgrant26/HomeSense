@@ -14,9 +14,11 @@ private:
 
 public:
     Sensor(string ="new sensor");
-    virtual double getReading()=0;
+    virtual double getReading() const=0;
     void initialize(); //set init variable
-    string getName();
+    void off(); //turns off sensor
+    bool isOn(); //tells us if the sensor is on or off
+    string getName() const;
 
 };
 

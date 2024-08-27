@@ -25,14 +25,13 @@ private:
     QPushButton* addSensorButton;
 
 
-
-
 public:
     MainWindow(QWidget* = nullptr);
 
-    void displaySensors(); //displays QVector on window
 
+    void displaySensors(); //displays QVector on window
     void sensorLoader(const QVector<QPushButton*>&); //loads sensors from controller to QVector
+    void clearPage();
 
 signals:
 

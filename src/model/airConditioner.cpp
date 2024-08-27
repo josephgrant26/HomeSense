@@ -1,9 +1,20 @@
 #include "airConditioner.h"
 
-AirConditioner::AirConditioner(string name): TemperatureSensor(name), isCooling(false), isHeating(false) {}
+AirConditioner::AirConditioner(string name, int temp): TemperatureSensor(name, temp), isCooling(false), isHeating(false) {}
 
-double AirConditioner::getReading() {}
+void AirConditioner::cool() {
+    if(isOn()){
+        if(isHeating) isHeating = false;
 
-void AirConditioner::cool() { isCooling=true; }
+        isCooling=true;
+    }
 
-void AirConditioner::heat() { isHeating=true; }
+}
+
+void AirConditioner::heat() {
+    if(isOn()){
+        if(isCooling) isCooling = false;
+
+        isHeating=true;
+    }
+}

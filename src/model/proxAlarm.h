@@ -9,11 +9,12 @@ private:
 
 public:
 
-ProxAlarm(double=0, string="new sensor");
+ProxAlarm( string="new sensor", double=0);
 
-void soundAlarm();
-//virtual void calibrate();
-double getReading();
+void soundAlarm();  //sets isAlarm to true
+
+
+
 
 };
 

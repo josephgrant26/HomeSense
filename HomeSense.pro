@@ -13,11 +13,13 @@ SOURCES += \
         src/controller/controller.cpp \
         src/model/airConditioner.cpp \
         src/model/ariQualitySensor.cpp \
+        src/model/model.cpp \
         src/model/motionSensor.cpp \
         src/model/proxAlarm.cpp \
         src/model/sensor.cpp \
         src/model/temperatureSensor.cpp \
         src/model/waterSensor.cpp \
+        src/view/addsensor.cpp \
         src/view/mainwindow.cpp \
         src/view/sensorpanel.cpp \
         src/view/view.cpp
@@ -26,11 +28,13 @@ HEADERS += \
     src/controller/controller.h \
     src/model/airConditioner.h \
     src/model/airQualitySensor.h \
+    src/model/model.h \
     src/model/motionSensor.h \
     src/model/proxAlarm.h \
     src/model/sensor.h \
     src/model/temperatureSensor.h \
     src/model/waterSensor.h \
+    src/view/addsensor.h \
     src/view/mainwindow.h \
     src/view/sensorpanel.h \
     src/view/view.h

@@ -4,16 +4,20 @@
 
 class WaterSensor: public Sensor{
 private:
-    double leak;
+    double leak;    // in mL
+    double tollerance;  //in mL
     bool isAlarm;
 
 public:
 
-    WaterSensor(string="new sensor");
+    WaterSensor(string="new sensor", double =0);
 
     void alarm();
+    double getReading() const;
+    double getTollerance() const;
+    void setLeakTollerance(double t);
 
-    double getReading();
+
 
 };
 

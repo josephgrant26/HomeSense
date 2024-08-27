@@ -18,15 +18,57 @@
 
 */
 
-AirQualitySensor::AirQualitySensor(const vector<string>& chemicals, string name): Sensor(name), setChemicals(chemicals) {
+AirQualitySensor::AirQualitySensor(const unordered_map<string, tuple<double,double>>& chem, string name): Sensor(name), chemicals(chem), isAlarm(false) {
 
-    //init umap:
-    for(vector<string>::const_iterator it = setChemicals.cbegin(); it != setChemicals.cend(); ++it ){
-        chemicalLevels.insert({*it, 0});
-    }
+
 
 }
 
-double AirQualitySensor::getReading() {}
+double AirQualitySensor::getReading() const{
+    int cont = 0;
 
-void AirQualitySensor::setSensor() {}
+    for(auto it = chemicals.cbegin(); it != chemicals.cend(); ++it){
+
+        if(get<0>(it->second) > get<1>(it->second)){
+            cont ++;
+        }
+    }
+
+    if(cont == 0) return 0;     //monitored chemicals are all below threshold
+    if (cont == 1) return 1;    //one chemical is above threshold
+    return 2;                   //there is more than one chemical above threshold
+}
+
+double AirQualitySensor::getReading(string chemical) const{
+
+    for(auto it = chemicals.cbegin(); it != chemicals.cend(); ++it){
+        if(it->first==chemical)
+            return get<0>(it->second);
+    }
+
+    return 0;
+}
+
+unordered_map<string, double> AirQualitySensor::getAllLimits() const{
+
+    unordered_map<string, double> tmp;
+    for(auto it = chemicals.cbegin(); it != chemicals.cend(); ++it){
+        tmp.insert({it->first, get<0>(it->second)});
+    }
+
+    return tmp;
+
+}
+
+double AirQualitySensor::getChemicalLimits(string chemical) const{
+
+    for(auto it = chemicals.cbegin(); it != chemicals.cend(); ++it){
+        if(it->first == chemical){
+            return get<1>(it->second);
+        }
+    }
+
+    return 0;
+}
+
+void AirQualitySensor::alarm() { isAlarm=true; }
