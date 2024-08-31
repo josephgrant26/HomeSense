@@ -13,6 +13,7 @@
 using std::tuple;
 using std::vector;
 using std::string;
+using std::get;
 
 class SensorGraphView: public QWidget{
     Q_OBJECT
@@ -33,16 +34,18 @@ private:
 
 public:
     SensorGraphView();
+    ~SensorGraphView();
 
-    void loadChart(QChart*, QVector<QString>);
+    void loadChart(QChart*, QVector<QString>);      //puts graph in graph view
     void unloadChart();
-    vector<tuple<string,double>> newValues();
+    vector<tuple<string,double>> newValues();       //gets all modified values
     QString getChartTitle() const;
+    void setLabel(QString);                         //labels the modifiable values
+
 
 public slots:
 
     void buttonLabel();
-    void setLabel(QString);
 
 signals:
 

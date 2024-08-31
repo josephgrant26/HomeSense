@@ -16,6 +16,15 @@ MainWindow::MainWindow(QWidget* parent): QWidget(parent), mainLayout(new QGridLa
 
 }
 
+MainWindow::~MainWindow(){
+    if(sensors){
+        for(auto it = sensors->begin(); it != sensors->end(); ++it){
+            delete (*it);
+        }
+        delete sensors;
+    }
+}
+
 void MainWindow::removeSensors(){
 
     for(auto it = sensors->begin(); it != sensors->end(); ++it){

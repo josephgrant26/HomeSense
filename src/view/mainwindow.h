@@ -27,12 +27,12 @@ private:
 
 public:
     MainWindow(QWidget* = nullptr);
-
+    ~MainWindow();
 
     void removeSensors();
     void displaySensors(); //displays QVector on window
     void sensorLoader(const QVector<QPushButton*>&); //loads sensors from controller to QVector
-    void clearPage();
+    void clearPage();   //removes the sensors from the view
 
 signals:
 

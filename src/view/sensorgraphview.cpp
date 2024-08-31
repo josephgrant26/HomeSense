@@ -16,6 +16,17 @@ SensorGraphView::SensorGraphView(): removeSensor(new QPushButton("Remove Sensor"
 
 }
 
+SensorGraphView::~SensorGraphView(){
+    if(values){
+        for(auto it = values->begin(); it != values->end(); ++it){
+            delete get<0>(*it);
+            delete get<1>(*it);
+        }
+        delete values;
+    }
+
+}
+
 void SensorGraphView::loadChart(QChart* c, QVector<QString> vals){
 
     graphView->setChart(c);

@@ -31,17 +31,19 @@ private:
 
 public:
     AddSensor(QWidget* =0);
-
+    ~AddSensor();
     QString getSensorName() const;
-    double getValue() const;
     QString getSensorType() const;
 
+    //logic for modifiable sensor attributes
+    double getValue() const;
     void setValueDesc(QString);
     void removeValueWidgets();
+    void hideValueSubmit();
     void showValueWidget();
     void displayAQM(const QVector<tuple<QLineEdit*, QDoubleSpinBox*>>&);  //displays the airQUalityMaker vector
     void hideAQM();
-    const std::unordered_map<std::string, tuple<double,double>> getAQMValues();
+    const std::unordered_map<std::string, tuple<double,double>> getAQMValues() const;
 
 signals:
     void submitValue();

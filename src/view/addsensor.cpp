@@ -28,6 +28,16 @@ AddSensor::AddSensor(QWidget* parent): QWidget(parent), mainLayout(new QGridLayo
     setLayout(mainLayout);
 }
 
+AddSensor::~AddSensor(){
+    if(airQualityMaker){
+        for(auto it = airQualityMaker->begin(); it != airQualityMaker->end(); ++it){
+            delete get<0>(*it);
+            delete get<1>(*it);
+        }
+        delete airQualityMaker;
+    }
+}
+
 QString AddSensor::getSensorName() const{ return sensorName->text() ;}
 
 double AddSensor::getValue()const{ return value->value(); }
@@ -47,6 +57,10 @@ void AddSensor::removeValueWidgets(){
     valueSubmit->hide();
     valueDesc->hide();
     mainLayout->update();
+}
+
+void AddSensor::hideValueSubmit(){
+    valueSubmit->hide();
 }
 
 void AddSensor::showValueWidget(){
@@ -88,7 +102,7 @@ void AddSensor::hideAQM(){
 
 }
 
-const std::unordered_map<std::string, tuple<double, double> > AddSensor::getAQMValues(){
+const std::unordered_map<std::string, tuple<double, double> > AddSensor::getAQMValues() const{
     std::unordered_map<std::string, tuple<double, double> > umap;
     for(auto it = airQualityMaker->cbegin(); it != airQualityMaker->cend(); ++it){
         umap.insert({get<0>(*it)->text().toStdString(), std::make_tuple(0,get<1>(*it)->value())});

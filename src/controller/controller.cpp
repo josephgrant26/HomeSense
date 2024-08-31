@@ -52,7 +52,23 @@ Controller::Controller(QObject* parent): QObject(parent), home(new MainWindow())
 
 }
 
-QJsonDocument Controller::saveDataDoc(){
+Controller::~Controller(){
+    delete home;
+    delete sensorPanel;
+    delete addSensor;
+    delete graphView;
+    delete sensorGraph;
+    delete simulator;
+    if (sensors) {
+        for (auto sensor : *sensors) {
+            delete sensor;
+        }
+        delete sensors;
+    }
+    delete view;
+}
+
+QJsonDocument Controller::saveDataDoc() const{
     QFile saveData (savePath);
     saveData.open(QIODevice::ReadOnly);
     QByteArray fileData = saveData.readAll();
@@ -61,7 +77,7 @@ QJsonDocument Controller::saveDataDoc(){
     return saveDoc;
 }
 
-Sensor* Controller::getSensor(QString name){
+Sensor* Controller::getSensor(QString name) const{
 
     for(auto it = sensors->cbegin(); it != sensors->cend(); ++it){
         if((*it)->getName() == name.toStdString()){ return *it; }
@@ -410,10 +426,10 @@ QJsonDocument Controller::fileToDoc(QString path){
 void Controller::displayValueDesc(){
     QString type = addSensor->getSensorType();
     addSensor->hideAQM();
-    if(type == "Motion Sensor" || type == "Proximity Alarm"){ addSensor->setValueDesc("set Range (in metres)"); addSensor->showValueWidget(); }
-    else if(type == "Water Leaks Sensor"){ addSensor->setValueDesc("Leakage threshold (in mL)"); addSensor->showValueWidget(); }
+    if(type == "Motion Sensor" || type == "Proximity Alarm"){ addSensor->setValueDesc("set Range (in metres)"); addSensor->showValueWidget(); addSensor->hideValueSubmit(); }
+    else if(type == "Water Leaks Sensor"){ addSensor->setValueDesc("Leakage threshold (in mL)"); addSensor->showValueWidget(); addSensor->hideValueSubmit(); }
     else if(type == "Air Quality Sensors"){ addSensor->setValueDesc("How many chemicals?"); addSensor->showValueWidget();}
-    else if(type == "Air Conditioner"){ addSensor->setValueDesc("Set Temperature Target"); addSensor->showValueWidget();}
+    else if(type == "Air Conditioner"){ addSensor->setValueDesc("Set Temperature Target"); addSensor->showValueWidget(); addSensor->hideValueSubmit(); }
     else{ addSensor->removeValueWidgets();}
 }
 

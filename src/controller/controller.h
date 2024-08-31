@@ -38,42 +38,41 @@ class Controller: public QObject{
     QString savePath;
     View* view;
 
-    QJsonDocument saveDataDoc();
-    Sensor* getSensor(QString);
 
 public:
     Controller(QObject* = nullptr);
-
+    ~Controller();
 
     //window management:
-    void createView();
-    void InitHomeScreen();      //loads the home screen
+    void createView();          //initialises the view, showing home(mainwindow)
+    void InitHomeScreen();      //loads up the home screen
 
     //vector and permanence
     QVector<QPushButton*> createQLabelVector();     //creates the QPushbutton to be displayed in home screen
     QVector<tuple<QLineEdit*, QDoubleSpinBox*>> createAQMVec(); //creates the AQMVector to be displayed in addSensor screen
-
+    QJsonDocument saveDataDoc() const;
+    Sensor* getSensor(QString) const;
     bool newSensor();                               //creates a single new sensor and writes it in savePath
-    bool initData();
+
     bool loadData(QJsonDocument); //reads a JSON and loads the sensors to the vector
     bool saveData() const; //reads a JSON or user inputs to add sensors to the array and the save file
     bool addData(QJsonDocument); //receives a new JSON document, updates saveData file and sensors vector
     QString getStandardSaveLocation() const;
     bool removeSensor(QString);
+    bool initData(); //reads from file on application start
 
 
 public slots:
 
-    //void handleClickedSensor();
-    void openWindow(QWidget*);
-    QString fileDialog();
+    void openWindow(QWidget*);      //shows the requested qwidget
+    QString fileDialog();           //opens a file dialog and returns selected file path
     QJsonDocument fileToDoc(QString);
     void displayValueDesc();    //shows correct QLabel text for addSensor view
     bool createNewSensor();     //creates new sensor, displays it in Home and saved it so savePath file
-    void openSensorGraph(QString);
-    void openSimluator(QString);
-    void closeSimulator();
-    void updateData();
+    void openSensorGraph(QString);  //creates and opens sensor's graph
+    void openSimluator(QString);    //creates the simulator for the graph
+    void closeSimulator();          //destroys simulator
+    void updateData();              //takes user modified values, updates them and saves them to file
 
 
 signals:
