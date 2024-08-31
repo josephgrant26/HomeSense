@@ -22,7 +22,7 @@
 
 using std::vector;
 
-//class MainWindow;
+
 
 class Controller: public QObject{
 

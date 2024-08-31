@@ -274,7 +274,7 @@ bool Controller::removeSensor(QString name){
     bool found = false;
 
     if(simulator) graphView->buttonLabel();
-    for(auto it = sensors->begin(); it != sensors->end(); ++it){
+    for(auto it = sensors->begin(); it != sensors->end();){
         if(QString::fromStdString((*it)->getName()) == name){
             found = true;
             delete (*it);

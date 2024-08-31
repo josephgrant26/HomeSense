@@ -26,7 +26,6 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::removeSensors(){
-
     for(auto it = sensors->begin(); it != sensors->end(); ++it){
         mainLayout->removeWidget((*it));
         delete (*it);
