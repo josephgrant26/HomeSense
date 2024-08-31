@@ -29,6 +29,7 @@ public:
     MainWindow(QWidget* = nullptr);
 
 
+    void removeSensors();
     void displaySensors(); //displays QVector on window
     void sensorLoader(const QVector<QPushButton*>&); //loads sensors from controller to QVector
     void clearPage();
@@ -36,6 +37,7 @@ public:
 signals:
 
     void openSensorPanel();
+    void sensorClicked(QString);
 
 
 

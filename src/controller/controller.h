@@ -5,6 +5,8 @@
 
 #include "src/view/view.h"
 #include "src/model/model.h"
+#include "src/model/sensorgraph.h"
+#include "simulator.h"
 
 #include <QVector>
 #include <QPushButton>
@@ -15,6 +17,7 @@
 #include <QMessageBox>
 #include <QScreen>
 #include <QJsonArray>
+#include <QStandardPaths>
 
 
 using std::vector;
@@ -28,11 +31,15 @@ class Controller: public QObject{
     MainWindow* home;
     SensorPanel* sensorPanel;
     AddSensor* addSensor;
+    SensorGraphView* graphView;
+    SensorGraph* sensorGraph;
+    Simulator* simulator;
     vector<Sensor*>* sensors;
     QString savePath;
     View* view;
 
     QJsonDocument saveDataDoc();
+    Sensor* getSensor(QString);
 
 public:
     Controller(QObject* = nullptr);
@@ -51,7 +58,9 @@ public:
     bool loadData(QJsonDocument); //reads a JSON and loads the sensors to the vector
     bool saveData() const; //reads a JSON or user inputs to add sensors to the array and the save file
     bool addData(QJsonDocument); //receives a new JSON document, updates saveData file and sensors vector
-    bool replaceData(); //refreshes data when savepath is changed
+    QString getStandardSaveLocation() const;
+    bool removeSensor(QString);
+
 
 public slots:
 
@@ -61,9 +70,15 @@ public slots:
     QJsonDocument fileToDoc(QString);
     void displayValueDesc();    //shows correct QLabel text for addSensor view
     bool createNewSensor();     //creates new sensor, displays it in Home and saved it so savePath file
+    void openSensorGraph(QString);
+    void openSimluator(QString);
+    void closeSimulator();
+    void updateData();
+
 
 signals:
     void newData();
+    void refreshGraphs();
 
 };
 

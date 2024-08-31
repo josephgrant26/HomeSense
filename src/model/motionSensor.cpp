@@ -6,13 +6,18 @@ void MotionSensor::calibrate(double d){ radius=d; }
 
 double MotionSensor::getCalibration() const { return radius; }
 
-void MotionSensor::detectMovement(double d) {
+void MotionSensor::setValue(double d) {
 
     if(isOn()){
         movement = true;
         intruder = d;
     }
 
+}
+
+void MotionSensor::setMovement(){
+
+    movement ? movement =false:movement = true;
 }
 
 double MotionSensor::getReading() const {
@@ -24,4 +29,3 @@ double MotionSensor::getReading() const {
 
 bool MotionSensor::isMovementDetected() const { return movement; }
 
-void MotionSensor::reset() { movement = false; }

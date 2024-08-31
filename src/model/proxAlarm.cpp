@@ -2,12 +2,14 @@
 
 ProxAlarm::ProxAlarm(string name, double d): MotionSensor(name,d), isAlarm(0) {}
 
-void ProxAlarm::soundAlarm() {
+void ProxAlarm::toggleAlarm() {
 
     if(isMovementDetected()){
-        isAlarm=true;
-        reset();
+        if(!isAlarm)
+            isAlarm=true;
     }
+    if(isAlarm)
+        isAlarm=false;
 }
 
 

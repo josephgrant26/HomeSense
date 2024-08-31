@@ -11,7 +11,7 @@ public:
 
 ProxAlarm( string="new sensor", double=0);
 
-void soundAlarm();  //sets isAlarm to true
+void toggleAlarm();  //sets isAlarm to true
 
 
 

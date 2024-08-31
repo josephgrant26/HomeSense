@@ -13,7 +13,7 @@ TemperatureSensor(string="new sensor", int =0);
 
 
 double getReading() const;
-void setCurrentTemperature(int);
+void setValue(double);
 
 };
 

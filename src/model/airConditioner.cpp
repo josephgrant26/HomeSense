@@ -1,6 +1,7 @@
 #include "airConditioner.h"
 
-AirConditioner::AirConditioner(string name, int temp): TemperatureSensor(name, temp), isCooling(false), isHeating(false) {}
+AirConditioner::AirConditioner(string name, int temp): TemperatureSensor(name, 0), isCooling(false), isHeating(false),
+    targetTemp(temp){}
 
 void AirConditioner::cool() {
     if(isOn()){
@@ -17,4 +18,16 @@ void AirConditioner::heat() {
 
         isHeating=true;
     }
+}
+
+bool AirConditioner::cooling(){
+    return isCooling;
+}
+
+void AirConditioner::setTargetTemp(double t){
+    targetTemp = t;
+}
+
+double AirConditioner::getTargetTemp() const{
+    return targetTemp;
 }

@@ -1,35 +1,22 @@
 #include "view.h"
 
-View::View(MainWindow* h, AddSensor* a, SensorPanel* n, QWidget* parent): QWidget(parent), logo(new QLabel(this)), mainLayout(new QGridLayout(this)), home(h)
-    , addSensor(a), sensorPanel(n), currentWidget(nullptr), saveFile(new QPushButton( "Set Save Path", this)){
+View::View(MainWindow* h, AddSensor* a, SensorPanel* n, SensorGraphView* g, QWidget* parent): QWidget(parent), logo(new QLabel(this)),
+    mainLayout(new QGridLayout(this)), home(h), addSensor(a), sensorPanel(n), sensorGraph(g),
+    currentWidget(nullptr), homePage(new QPushButton("Main Page", this)){
 
-    QPixmap imgMap("../../images/logo.png");
+    QPixmap imgMap(":images/images/logo.png");
     if(imgMap.isNull()) qDebug() << "Logo pathing wasn't correctly set. Current path is:" << QDir::currentPath();
 
-    logo->setPixmap(imgMap);
+    logo->setPixmap(imgMap.scaledToHeight(QApplication::primaryScreen()->size().height()*0.15, Qt::SmoothTransformation));
+    homePage->setFixedSize(QApplication::primaryScreen()->size().width()*0.15,QApplication::primaryScreen()->size().height()*0.08);
 
-    connect(saveFile, &QPushButton::clicked, this, &View::newSavePath);
+    connect(homePage, &QPushButton::clicked, this, &View::goHome);
 
-
-    mainLayout->addWidget(logo, 0,0);
-    mainLayout->addWidget(saveFile, 0, 3);
+    mainLayout->addWidget(logo, 0,0, Qt::AlignCenter | Qt::AlignTop);
+    mainLayout->addWidget(homePage, 0,1);
     setLayout(mainLayout);
 
-    windowSize();
-
 }
-void View::windowSize(){
-
-    QScreen *screen = QGuiApplication::primaryScreen();
-    auto width = static_cast<int>(screen->geometry().width())*0.4;
-    auto height = static_cast<int>(screen->geometry().height())*0.4;
-    auto x = (screen->geometry().width() - 2*width)/2;
-    auto y = (screen->geometry().height() - 1.5*height)/2;
-    move(x,y);
-    resize(762, 432);
-
-}
-
 
 void View::setCurrentWidget(QWidget* widget)
 {
@@ -38,7 +25,7 @@ void View::setCurrentWidget(QWidget* widget)
         mainLayout->removeWidget(currentWidget);
     }
 
-    mainLayout->addWidget(widget,1,0);
+    mainLayout->addWidget(widget,2,0);
     currentWidget = widget;
     widget->show();
 
@@ -50,6 +37,10 @@ void View::setHome(const QVector<QPushButton*>& v){
     home->displaySensors();
     setCurrentWidget(home);
 
+}
+
+QWidget* View::getCurrentWidget() const{
+    return currentWidget;
 }
 
 

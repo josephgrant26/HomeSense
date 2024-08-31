@@ -1,28 +1,8 @@
 #include"airQualitySensor.h"
-//bool bO3, bNO2, bNO, bCO, bSO2, bH2S;
-/*AirQualitySensor::AirQualitySensor(bool o=0, bool n2=0, bool n=0, bool c=0, bool s=0, bool h=0, 
-                                    double O=0, double N2=0, double N=0, double C=0, double S=0, double H=0, double d=0): Sensor(),
-                                    bO3(o), bNO2(n2), bNO(n), bCO(c), bH2S(s) {
+#include <QDebug>
 
-                                        if(d>3) dustLevel=0;
-                                        else{ dustLevel=d;}
-
-                                        if(bO3) O3=O;
-                                        if(bNO2) NO2=N2;
-                                        if(bNO) NO=N;
-                                        if(bCO) CO=C;
-                                        if(bH2S) H2S=H;
-                                        if(bSO2) SO2=S;
-
-                                    }
-
-*/
-
-AirQualitySensor::AirQualitySensor(const unordered_map<string, tuple<double,double>>& chem, string name): Sensor(name), chemicals(chem), isAlarm(false) {
-
-
-
-}
+AirQualitySensor::AirQualitySensor(const unordered_map<string, tuple<double,double>>& chem, string name): Sensor(name),
+    chemicals(chem), isAlarm(false) {}
 
 double AirQualitySensor::getReading() const{
     int cont = 0;
@@ -42,8 +22,12 @@ double AirQualitySensor::getReading() const{
 double AirQualitySensor::getReading(string chemical) const{
 
     for(auto it = chemicals.cbegin(); it != chemicals.cend(); ++it){
-        if(it->first==chemical)
+        if(it->first==chemical){
+            qDebug() << "chemval: " << get<0>(it->second) << "lim: " << get<1>(it->second);
+            qDebug("");
             return get<0>(it->second);
+
+        }
     }
 
     return 0;
@@ -53,7 +37,7 @@ unordered_map<string, double> AirQualitySensor::getAllLimits() const{
 
     unordered_map<string, double> tmp;
     for(auto it = chemicals.cbegin(); it != chemicals.cend(); ++it){
-        tmp.insert({it->first, get<0>(it->second)});
+        tmp.insert({it->first, get<1>(it->second)});
     }
 
     return tmp;
@@ -71,4 +55,24 @@ double AirQualitySensor::getChemicalLimits(string chemical) const{
     return 0;
 }
 
-void AirQualitySensor::alarm() { isAlarm=true; }
+void AirQualitySensor::toggleAlarm() {
+    if(isAlarm)
+        isAlarm=false;
+    else
+        isAlarm=true;
+}
+
+void AirQualitySensor::setValue(string c, double v) {
+    for(auto it = chemicals.begin(); it != chemicals.end(); ++it){
+        if(it->first==c){
+            get<0>(it->second) = v;
+
+        }
+    }
+}
+
+void AirQualitySensor::setValue(double d){
+    for(auto it = chemicals.begin(); it!= chemicals.end(); ++it){
+        get<0>((it)->second) = d;
+    }
+}

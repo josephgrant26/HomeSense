@@ -49,11 +49,21 @@ void AddSensor::removeValueWidgets(){
     mainLayout->update();
 }
 
-void AddSensor::removeValueSubmit(){ valueSubmit->hide(); }
+void AddSensor::showValueWidget(){
+    value->show();
+    valueSubmit->show();
+    valueDesc->show();
+    mainLayout->update();
+
+}
 
 void AddSensor::displayAQM(const QVector<tuple<QLineEdit *, QDoubleSpinBox *> > & v){
 
     int i=4;
+    valueSubmit->hide();
+    valueDesc->hide();
+    value->hide();
+
     mainLayout->removeWidget(submit);
     for(auto it = v.cbegin(); it != v.cend(); ++it){
         mainLayout->addWidget(get<0>(*it), i,0);
@@ -65,6 +75,16 @@ void AddSensor::displayAQM(const QVector<tuple<QLineEdit *, QDoubleSpinBox *> > 
 
     mainLayout->addWidget(submit, i,0);
 
+
+}
+
+void AddSensor::hideAQM(){
+    if(airQualityMaker){
+        for(auto it = airQualityMaker->begin(); it != airQualityMaker->end(); ++ it){
+            get<0>(*it)->hide();
+            get<1>(*it)->hide();
+        }
+    }
 
 }
 

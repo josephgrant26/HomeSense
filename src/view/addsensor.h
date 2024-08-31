@@ -38,8 +38,9 @@ public:
 
     void setValueDesc(QString);
     void removeValueWidgets();
-    void removeValueSubmit();
+    void showValueWidget();
     void displayAQM(const QVector<tuple<QLineEdit*, QDoubleSpinBox*>>&);  //displays the airQUalityMaker vector
+    void hideAQM();
     const std::unordered_map<std::string, tuple<double,double>> getAQMValues();
 
 signals:

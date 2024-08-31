@@ -12,11 +12,13 @@ public:
 
     WaterSensor(string="new sensor", double =0);
 
-    void alarm();
-    double getReading() const;
-    double getTollerance() const;
+    void setValue(double);
     void setLeakTollerance(double t);
 
+    double getReading() const;
+    double getTollerance() const;
+
+    void toggleAlarm();
 
 
 };

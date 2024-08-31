@@ -16,11 +16,25 @@ MainWindow::MainWindow(QWidget* parent): QWidget(parent), mainLayout(new QGridLa
 
 }
 
+void MainWindow::removeSensors(){
+
+    for(auto it = sensors->begin(); it != sensors->end(); ++it){
+        mainLayout->removeWidget((*it));
+        delete (*it);
+    }
+    sensors->clear();
+    mainLayout->update();
+
+}
+
 void MainWindow::displaySensors(){
+
     int i = 1;
     for(QVector<QPushButton*>::iterator it = sensors->begin(); it != sensors->end(); ++it){
 
         mainLayout->addWidget(*it, i, 0);
+        QPushButton* button = *it;
+        connect(*it, &QPushButton::clicked, this, [this, button] {emit sensorClicked((button)->text());});
         ++i;
 
     }
@@ -29,7 +43,6 @@ void MainWindow::displaySensors(){
 
 void MainWindow::sensorLoader(const QVector<QPushButton*>& v){
     clearPage();
-    qDebug() << v;
     if(!sensors->isEmpty()){ sensors->clear(); qDebug() << sensors->empty();}
     for(QVector<QPushButton*>::ConstIterator it = v.cbegin(); it != v.cend(); ++it){
         sensors->push_back(*it);

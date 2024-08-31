@@ -8,6 +8,6 @@ double TemperatureSensor::getReading() const{
 
 }
 
-void TemperatureSensor::setCurrentTemperature(int temp){
+void TemperatureSensor::setValue(double temp){
     currentTemp = temp;
 }

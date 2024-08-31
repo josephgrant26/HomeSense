@@ -13,7 +13,6 @@ class SensorPanel: public QWidget{
     //QLabel* label;
     QPushButton* loadFile;
     QPushButton* addSensor;
-    QPushButton* back;
     QGridLayout* mainLayout;
 
 public:
@@ -21,7 +20,7 @@ public:
 
 
 signals:
-    void openHome();
+
     void appendFile();
     void newSensor();
 };

@@ -1,0 +1,29 @@
+[
+    {
+        "name": "allarme",
+        "radius": 2,
+        "type": "ProxAlarm"
+    },
+    {
+        "lastTemperature": 0,
+        "name": "condizionatore",
+        "type": "TemperatureSensor"
+    },
+    {
+        "leak": "0",
+        "name": "acqua",
+        "tollerance": "0",
+        "type": "WaterSensor"
+    },
+    {
+        "lastTemperature": 0,
+        "name": "condizionatorissimo",
+        "type": "TemperatureSensor"
+    },
+    {
+        "leak": 0,
+        "name": "acquatico",
+        "tollerance": 5,
+        "type": "WaterSensor"
+    }
+]
