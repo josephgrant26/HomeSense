@@ -90,7 +90,7 @@ QVector<QPushButton*> Controller::createQLabelVector(){
 
     home->removeSensors();
     for(vector<Sensor*>::const_iterator it = sensors->cbegin(); it != sensors->cend(); ++it){
-        qDebug() << (*it)->getName();
+
         QPushButton* btn = new QPushButton(QString::fromStdString((*it)->getName()));
         tmp.push_back(btn);
     }
@@ -150,8 +150,6 @@ bool Controller::saveData() const{
             QJsonObject umap, umap1;
 
             for(auto it = tmp.cbegin(); it != tmp.cend(); ++it){
-                qDebug() << "chem limit: " << it->second << "chem value:" << ob->getReading((*it).first);
-                qDebug("");
                 umap[QString::fromStdString((*it).first)]= (*it).second;
                 umap1[QString::fromStdString((*it).first)]= (ob->getReading((*it).first));
             }
@@ -260,10 +258,8 @@ bool Controller::removeSensor(QString name){
     bool found = false;
 
     if(simulator) graphView->buttonLabel();
-    qDebug() << sensors->size();
     for(auto it = sensors->begin(); it != sensors->end(); ++it){
         if(QString::fromStdString((*it)->getName()) == name){
-            qDebug("ohh");
             found = true;
             delete (*it);
             sensors->erase((it));
@@ -273,7 +269,6 @@ bool Controller::removeSensor(QString name){
             ++it;
         }
     }
-    qDebug() << sensors->size();
     InitHomeScreen();
     saveData();
     return found;

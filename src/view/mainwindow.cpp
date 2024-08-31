@@ -43,7 +43,7 @@ void MainWindow::displaySensors(){
 
 void MainWindow::sensorLoader(const QVector<QPushButton*>& v){
     clearPage();
-    if(!sensors->isEmpty()){ sensors->clear(); qDebug() << sensors->empty();}
+    if(!sensors->isEmpty()){ sensors->clear(); }
     for(QVector<QPushButton*>::ConstIterator it = v.cbegin(); it != v.cend(); ++it){
         sensors->push_back(*it);
     }

@@ -23,8 +23,6 @@ double AirQualitySensor::getReading(string chemical) const{
 
     for(auto it = chemicals.cbegin(); it != chemicals.cend(); ++it){
         if(it->first==chemical){
-            qDebug() << "chemval: " << get<0>(it->second) << "lim: " << get<1>(it->second);
-            qDebug("");
             return get<0>(it->second);
 
         }
