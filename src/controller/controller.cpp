@@ -136,6 +136,8 @@ bool Controller::initData(){
         loadData(doc);
         return true;
     }
+    QMessageBox error;
+    error.critical(view, "Error", "Coudln't open file");
     return false;
 
 }
@@ -197,6 +199,8 @@ bool Controller::saveData() const{
     QJsonDocument doc(array);
 
     if(!file.isOpen()){
+        QMessageBox error;
+        error.critical(view, "Error", "Couldn't open save file");
          return false;
     }
     else{
@@ -204,7 +208,8 @@ bool Controller::saveData() const{
         file.close();
         return true;
     }
-
+    QMessageBox error;
+    error.critical(view, "Error", "Unexpected error");
     return false;
 }
 
@@ -219,7 +224,8 @@ bool Controller::addData(QJsonDocument doc){
         for(auto kt = newDataArray.cbegin(); kt != newDataArray.cend(); ++kt){
             QJsonObject bjo = (*kt).toObject();
             if(obj["name"] == bjo["name"]){
-                qWarning("New File contains a sensor with same name as saveFile");
+                QMessageBox error;
+                error.critical(view, "Error", "New file musn't have the same sensor names as the save file");
                 return false;
             }
         }
@@ -234,6 +240,8 @@ bool Controller::addData(QJsonDocument doc){
     saveDoc = QJsonDocument(saveDataArray);
 
     if(!file.isOpen()){
+        QMessageBox error;
+        error.critical(view, "Error", "Couldn't open save file");
         return false;
     }
 
@@ -287,6 +295,10 @@ bool Controller::removeSensor(QString name){
     }
     InitHomeScreen();
     saveData();
+    if(!found){
+        QMessageBox error;
+        error.critical(view, "Error", "Coudln't remove sensor");
+    }
     return found;
 }
 
@@ -438,6 +450,8 @@ bool Controller::createNewSensor(){
     Sensor* tmp;
     for(auto it = sensors->cbegin(); it != sensors->cend(); ++it){
         if((*it)->getName() == addSensor->getSensorName().toStdString()){
+            QMessageBox error;
+            error.critical(view, "Error", "Sensor name clashes with existing sensors");
             return false;
         }
     }
@@ -460,7 +474,11 @@ bool Controller::createNewSensor(){
     else if(type == "Air Conditioner"){
         tmp = new AirConditioner(addSensor->getSensorName().toStdString(), addSensor->getValue());
     }
-    else return false;
+    else{
+        QMessageBox error;
+        error.critical(view, "Error", "Unexpected error in sensor creation");
+        return false;
+    }
 
     sensors->push_back(tmp);
 
