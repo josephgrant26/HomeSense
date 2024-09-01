@@ -1,0 +1,31 @@
+[
+    {
+        "TargetTemp": 24,
+        "lastTemperature": 0,
+        "name": "AirConditioner",
+        "type": "AirConditioner"
+    },
+    {
+        "Chemical&Limits": {
+            "CO": 5,
+            "CO2": 5
+        },
+        "Chemical_latestValues": {
+            "CO": 0,
+            "CO2": 0
+        },
+        "name": "AirSensor",
+        "type": "AirQualitySensor"
+    },
+    {
+        "name": "IntruderAlert",
+        "radius": 15,
+        "type": "ProxAlarm"
+    },
+    {
+        "leak": 0,
+        "name": "WaterMonitor",
+        "tollerance": 10,
+        "type": "WaterSensor"
+    }
+]
