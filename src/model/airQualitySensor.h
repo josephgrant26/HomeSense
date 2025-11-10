@@ -35,7 +35,7 @@ public:
         //2 = two or more anomalies
         //3 = error code
 
-
+    //diobestia
     virtual void setValue(string, double);
     virtual void setValue(double);                                  //sets the value to all chemicals
 
